@@ -21,10 +21,8 @@ pub fn plugin(_attr: TokenStream, item: TokenStream) -> TokenStream {
             (name, version)
         }
 
-        pub fn __kovi_run_async_plugin(p: PluginBuilder) -> std::pin::Pin<Box<dyn std::future::Future<Output = ()> + Send>> {
-            Box::pin(async move {
-                #fn_name(p).await;
-            })
+        pub fn __kovi_run_async_plugin() -> std::pin::Pin<Box<dyn std::future::Future<Output = ()> + Send>> {
+            Box::pin(#fn_name())
         }
     };
 
