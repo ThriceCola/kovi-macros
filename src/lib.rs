@@ -15,13 +15,13 @@ pub fn plugin(_attr: TokenStream, item: TokenStream) -> TokenStream {
     let expanded = quote! {
         #input
 
-        pub fn __kovi__get_plugin_info() -> (&'static str, &'static str) {
+        pub fn __kovi_get_plugin_info() -> (&'static str, &'static str) {
             let name = env!("CARGO_PKG_NAME");
             let version = env!("CARGO_PKG_VERSION");
             (name, version)
         }
 
-        pub fn __kovi__run_async_plugin(p: PluginBuilder) -> std::pin::Pin<Box<dyn std::future::Future<Output = ()> + Send>> {
+        pub fn __kovi_run_async_plugin(p: PluginBuilder) -> std::pin::Pin<Box<dyn std::future::Future<Output = ()> + Send>> {
             Box::pin(async move {
                 #fn_name(p).await;
             })

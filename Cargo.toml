@@ -1,6 +1,6 @@
 [package]
 name = "kovi-macros"
-version = "0.3.0-rc1"
+version = "0.3.0-rc2"
 edition = "2021"
 description = "An auxiliary library for the kovi crate"
 license = "MPL-2.0"
