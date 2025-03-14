@@ -1,8 +1,3 @@
-//! # `kovi-macros`
-//!
-//! `kovi-macros` is an auxiliary library for the [`kovi`](https://crates.io/crates/kovi) crate.
-
-
 use proc_macro::TokenStream;
 use quote::quote;
 use syn::{parse_macro_input, ItemFn};
@@ -26,6 +21,16 @@ pub fn plugin(_attr: TokenStream, item: TokenStream) -> TokenStream {
             Box::pin(async {
                 #fn_name().await;
             })
+        }
+
+        pub fn __kovi_build_plugin() -> kovi::plugin::Plugin {
+            let (name, version) = crate::__kovi_get_plugin_info();
+
+            kovi::plugin::Plugin::new(
+                name.to_string(),
+                version.to_string(),
+                std::sync::Arc::new(crate::__kovi_run_async_plugin),
+            )
         }
     };
 
